@@ -1,21 +1,19 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nyra - Assistente de Produtividade</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Chat Inteligente</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div class="chat-box">
-        <div id="chat-content">
-            <!-- Mensagens do chat vão aparecer aqui -->
-        </div>
-        <input type="text" id="input" placeholder="Digite sua mensagem..." />
-        <button onclick="enviarParaNyra()">Enviar</button>
+  <div class="chat-container">
+    <div id="chat-box" class="chat-box"></div>
+    <div class="input-area">
+      <input type="text" id="user-input" placeholder="Digite sua mensagem...">
+      <button onclick="sendMessage()">Enviar</button>
     </div>
-
-    <script src="script.js"></script>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
+
