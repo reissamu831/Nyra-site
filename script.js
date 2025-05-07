@@ -1,45 +1,42 @@
-const apiKey = 'SUA_CHAVE_API';  // Substitua com sua chave da OpenAI
+function enviarMensagem() {
+  const input = document.getElementById("mensagem");
+  const texto = input.value.trim().toLowerCase();
+  if (texto === "") return;
 
-async function enviarParaNyra() {
-    const mensagem = document.getElementById("input").value;
-    if (!mensagem) return;
+  const chat = document.getElementById("chat");
 
-    // Adiciona a mensagem do usuário na tela
-    adicionarMensagem("Você: " + mensagem);
+  const msgUsuario = document.createElement("p");
+  msgUsuario.textContent = "Você: " + texto;
+  chat.appendChild(msgUsuario);
 
-    // Envia a mensagem para a OpenAI API
-    const resposta = await obterRespostaDaNyra(mensagem);
-    
-    // Adiciona a resposta de Nyra na tela
-    adicionarMensagem("Nyra: " + resposta);
-    
-    // Limpa o campo de entrada
-    document.getElementById("input").value = '';
+  const resposta = gerarResposta(texto);
+  const msgNyra = document.createElement("p");
+  msgNyra.textContent = "Nyra: " + resposta;
+  chat.appendChild(msgNyra);
+
+  input.value = "";
+  chat.scrollTop = chat.scrollHeight;
 }
 
-async function obterRespostaDaNyra(mensagem) {
-    const response = await fetch('https://api.openai.com/v1/completions', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${apiKey}`
-        },
-        body: JSON.stringify({
-            model: "gpt-4",  // Você pode mudar para o modelo que preferir
-            prompt: mensagem,
-            max_tokens: 150,
-            temperature: 0.7
-        })
-    });
+function gerarResposta(msg) {
+  const respostas = {
+    "olá": "Oi! Como posso ajudar na sua produtividade hoje?",
+    "bom dia": "Bom dia! Já organizou sua agenda de hoje?",
+    "meta": "Qual é sua meta principal do dia?",
+    "foco": "Dica de foco: 25 minutos de trabalho + 5 de pausa!",
+    "cansado": "Faça uma pausa curta e respire. Você consegue!",
+    "produtividade": "Organize suas tarefas em ordem de prioridade!",
+    "estudar": "Blocos de 30 minutos de estudo são muito eficientes.",
+    "obrigado": "Sempre à disposição!",
+    "tchau": "Até logo! Continue se esforçando!"
+  };
 
-    const data = await response.json();
-    return data.choices[0].text.trim();
+  for (const chave in respostas) {
+    if (msg.includes(chave)) {
+      return respostas[chave];
+    }
+  }
+
+  return "Desculpe, não entendi. Pode repetir de outra forma?";
 }
 
-function adicionarMensagem(texto) {
-    const chatContent = document.getElementById("chat-content");
-    const div = document.createElement("div");
-    div.textContent = texto;
-    chatContent.appendChild(div);
-    chatContent.scrollTop = chatContent.scrollHeight;  // Rola para a última mensagem
-}
