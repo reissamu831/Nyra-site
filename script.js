@@ -22,20 +22,35 @@ document.querySelector("form").addEventListener("submit", function (e) {
   input.value = "";
 });
 
-function gerarRespostaNyra(msg) {
-  msg = msg.toLowerCase();
+function sendMessage() {
+  const input = document.getElementById("user-input");
+  const message = input.value.trim();
+  if (message === "") return;
 
-  if (msg.includes("oi") || msg.includes("olá")) {
-    return "Olá! Como posso ajudar você a ser mais produtivo hoje?";
-  } else if (msg.includes("meta") || msg.includes("objetivo")) {
-    return "Definir metas claras ajuda a manter o foco. Quer que eu te ajude a criar uma?";
-  } else if (msg.includes("rotina")) {
-    return "Organizar uma rotina diária é essencial. Você quer montar uma agora?";
-  } else if (msg.includes("produtividade")) {
-    return "Produtividade vem de consistência e organização. Vamos trabalhar nisso juntos!";
-  } else if (msg.includes("motivação")) {
-    return "Você já chegou até aqui, e isso já é um passo enorme. Continue firme!";
+  const chatBox = document.getElementById("chat-box");
+
+  // Exibe a mensagem do usuário
+  const userMsg = document.createElement("div");
+  userMsg.textContent = "Você: " + message;
+  userMsg.style.fontWeight = "bold";
+  chatBox.appendChild(userMsg);
+
+  // Resposta automática
+  const botMsg = document.createElement("div");
+  botMsg.textContent = "Bot: " + gerarResposta(message);
+  chatBox.appendChild(botMsg);
+
+  input.value = "";
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+function gerarResposta(texto) {
+  texto = texto.toLowerCase();
+  if (texto.includes("oi") || texto.includes("olá")) {
+    return "Olá! Como posso ajudar?";
+  } else if (texto.includes("tudo bem")) {
+    return "Tudo ótimo, obrigado por perguntar!";
   } else {
-    return "Estou aqui para te ajudar com foco, rotina e produtividade. Como posso ser útil?";
+    return "Desculpe, não entendi. Pode tentar de outra forma?";
   }
 }
