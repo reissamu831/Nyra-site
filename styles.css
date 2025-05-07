@@ -1,81 +1,59 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
 
 body {
-  background-color: #f9f9fb;
-  font-family: 'Poppins', sans-serif;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #1f4037, #99f2c8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   margin: 0;
-  padding: 0;
+}
+
+.chat-container {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  width: 400px;
+  max-width: 90%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-}
-
-header {
-  background-color: #a88beb;
-  color: white;
-  width: 100%;
-  padding: 20px;
-  text-align: center;
-  font-size: 1.5rem;
-  font-weight: 500;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-main {
-  max-width: 600px;
-  width: 100%;
   padding: 20px;
 }
 
-.chat {
-  background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  padding: 20px;
-  min-height: 300px;
-  margin-bottom: 20px;
-  overflow-y: auto;
-  height: 400px;
-}
-
-.chat p {
-  background-color: #f1f0ff;
-  padding: 10px 14px;
-  border-radius: 10px;
-  margin: 10px 0;
-  max-width: 80%;
-  word-wrap: break-word;
-}
-
-.chat p:nth-child(odd) {
-  background-color: #e3e3e3;
-  align-self: flex-start;
-}
-
-form {
-  display: flex;
-  gap: 10px;
-}
-
-input {
+.chat-box {
   flex: 1;
-  padding: 12px;
-  border-radius: 8px;
   border: 1px solid #ccc;
-  font-size: 1rem;
+  border-radius: 5px;
+  padding: 10px;
+  overflow-y: auto;
+  height: 300px;
+  background-color: #f9f9f9;
+  margin-bottom: 10px;
+}
+
+.input-area {
+  display: flex;
+}
+
+#user-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 button {
-  padding: 12px 20px;
-  background-color: #a88beb;
-  color: white;
+  margin-left: 10px;
+  padding: 10px 15px;
   border: none;
-  border-radius: 8px;
-  font-weight: 600;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #9175dc;
+  background-color: #45a049;
 }
+
