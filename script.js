@@ -1,56 +1,25 @@
-document.querySelector("form").addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  const input = document.querySelector("input");
-  const mensagem = input.value.trim();
-  const chat = document.querySelector(".chat");
-
-  if (mensagem === "") return;
-
-  // Exibe a mensagem do usuário
-  const msgUsuario = document.createElement("p");
-  msgUsuario.textContent = `Você: ${mensagem}`;
-  chat.appendChild(msgUsuario);
-
-  // Gera a resposta da Nyra
-  const resposta = gerarRespostaNyra(mensagem);
-
-  const msgNyra = document.createElement("p");
-  msgNyra.textContent = `Nyra: ${resposta}`;
-  chat.appendChild(msgNyra);
-
-  input.value = "";
-});
-
 function sendMessage() {
-  const input = document.getElementById("user-input");
-  const message = input.value.trim();
-  if (message === "") return;
-
-  const chatBox = document.getElementById("chat-box");
-
-  // Exibe a mensagem do usuário
-  const userMsg = document.createElement("div");
-  userMsg.textContent = "Você: " + message;
-  userMsg.style.fontWeight = "bold";
-  chatBox.appendChild(userMsg);
-
-  // Resposta automática
-  const botMsg = document.createElement("div");
-  botMsg.textContent = "Bot: " + gerarResposta(message);
-  chatBox.appendChild(botMsg);
-
-  input.value = "";
-  chatBox.scrollTop = chatBox.scrollHeight;
-}
-
-function gerarResposta(texto) {
-  texto = texto.toLowerCase();
-  if (texto.includes("oi") || texto.includes("olá")) {
-    return "Olá! Como posso ajudar?";
-  } else if (texto.includes("tudo bem")) {
-    return "Tudo ótimo, obrigado por perguntar!";
-  } else {
-    return "Desculpe, não entendi. Pode tentar de outra forma?";
+  const userInput = document.getElementById('user-input').value;
+  if (userInput.trim() !== "") {
+    const chatBox = document.getElementById('chat-box');
+    
+    // Cria a mensagem do usuário
+    const userMessage = document.createElement('div');
+    userMessage.classList.add('user-message');
+    userMessage.textContent = userInput;
+    chatBox.appendChild(userMessage);
+    
+    // Limpa o campo de entrada
+    document.getElementById('user-input').value = '';
+    
+    // Resposta da IA Hyra
+    setTimeout(() => {
+      const botMessage = document.createElement('div');
+      botMessage.classList.add('bot-message');
+      botMessage.textContent = "Hyra: Oi, você disse: " + userInput;
+      chatBox.appendChild(botMessage);
+      chatBox.scrollTop = chatBox.scrollHeight; // Rola para o final da conversa
+    }, 500);
   }
 }
+
