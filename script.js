@@ -1,42 +1,41 @@
-function enviarMensagem() {
-  const input = document.getElementById("mensagem");
-  const texto = input.value.trim().toLowerCase();
-  if (texto === "") return;
+document.querySelector("form").addEventListener("submit", function (e) {
+  e.preventDefault();
 
-  const chat = document.getElementById("chat");
+  const input = document.querySelector("input");
+  const mensagem = input.value.trim();
+  const chat = document.querySelector(".chat");
 
+  if (mensagem === "") return;
+
+  // Exibe a mensagem do usuário
   const msgUsuario = document.createElement("p");
-  msgUsuario.textContent = "Você: " + texto;
+  msgUsuario.textContent = `Você: ${mensagem}`;
   chat.appendChild(msgUsuario);
 
-  const resposta = gerarResposta(texto);
+  // Gera a resposta da Nyra
+  const resposta = gerarRespostaNyra(mensagem);
+
   const msgNyra = document.createElement("p");
-  msgNyra.textContent = "Nyra: " + resposta;
+  msgNyra.textContent = `Nyra: ${resposta}`;
   chat.appendChild(msgNyra);
 
   input.value = "";
-  chat.scrollTop = chat.scrollHeight;
-}
+});
 
-function gerarResposta(msg) {
-  const respostas = {
-    "olá": "Oi! Como posso ajudar na sua produtividade hoje?",
-    "bom dia": "Bom dia! Já organizou sua agenda de hoje?",
-    "meta": "Qual é sua meta principal do dia?",
-    "foco": "Dica de foco: 25 minutos de trabalho + 5 de pausa!",
-    "cansado": "Faça uma pausa curta e respire. Você consegue!",
-    "produtividade": "Organize suas tarefas em ordem de prioridade!",
-    "estudar": "Blocos de 30 minutos de estudo são muito eficientes.",
-    "obrigado": "Sempre à disposição!",
-    "tchau": "Até logo! Continue se esforçando!"
-  };
+function gerarRespostaNyra(msg) {
+  msg = msg.toLowerCase();
 
-  for (const chave in respostas) {
-    if (msg.includes(chave)) {
-      return respostas[chave];
-    }
+  if (msg.includes("oi") || msg.includes("olá")) {
+    return "Olá! Como posso ajudar você a ser mais produtivo hoje?";
+  } else if (msg.includes("meta") || msg.includes("objetivo")) {
+    return "Definir metas claras ajuda a manter o foco. Quer que eu te ajude a criar uma?";
+  } else if (msg.includes("rotina")) {
+    return "Organizar uma rotina diária é essencial. Você quer montar uma agora?";
+  } else if (msg.includes("produtividade")) {
+    return "Produtividade vem de consistência e organização. Vamos trabalhar nisso juntos!";
+  } else if (msg.includes("motivação")) {
+    return "Você já chegou até aqui, e isso já é um passo enorme. Continue firme!";
+  } else {
+    return "Estou aqui para te ajudar com foco, rotina e produtividade. Como posso ser útil?";
   }
-
-  return "Desculpe, não entendi. Pode repetir de outra forma?";
 }
-
